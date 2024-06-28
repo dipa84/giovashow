@@ -124,6 +124,35 @@
         .fieldset-small legend {
             font-size: 0.8em;
         }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+            }
+            input, button, select {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+            fieldset {
+                padding: 10px;
+            }
+            fieldset legend {
+                font-size: 0.9em;
+            }
+            .result {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+            .error {
+                font-size: 0.8em;
+            }
+            .word-buttons button {
+                padding: 5px 8px;
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -152,7 +181,6 @@
             <p>Inserisci il testo per creare un anagramma valido dalla frase di partenza:</p>
             <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" oninput="modifyCount()">
         </fieldset>
-
 
         <fieldset class="fieldset-small">
             <legend>Suggerimenti</legend>
