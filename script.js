@@ -18,10 +18,13 @@ function countCharacters() {
     }
 
     const resultDiv = document.getElementById("result");
+    const mobileResultDiv = document.getElementById("mobileResult");
     if (textInput) {
         resultDiv.classList.remove("empty");
+        mobileResultDiv.classList.remove("empty");
     } else {
         resultDiv.classList.add("empty");
+        mobileResultDiv.classList.add("empty");
     }
 
     displayCounts();
@@ -31,8 +34,11 @@ function countCharacters() {
 function modifyCount() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
     const modifyResultDiv = document.getElementById("modifyResult");
+    const mobileErrorDiv = document.getElementById("mobileError");
     modifyResultDiv.innerHTML = "Anagramma Valido ma Incompleto";
+    mobileErrorDiv.innerHTML = "";
     modifyResultDiv.classList.remove('valid', 'invalid');
+    mobileErrorDiv.classList.remove('valid', 'invalid');
 
     // Create a copy of characterCounts to work with
     let tempCounts = { ...characterCounts };
@@ -68,20 +74,26 @@ function modifyCount() {
     if (valid && allLettersUsed) {
         modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
         modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.classList.add('valid');
     } else if (valid) {
         modifyResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
         modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.classList.add('valid');
     } else {
         let errorMessage = unavailableLetters.length === 1 ? `La lettera "${unavailableLetters[0]}" non è disponibile!` : `Le lettere "${unavailableLetters.join('", "')}" non sono disponibili!`;
         modifyResultDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
         modifyResultDiv.classList.add('invalid');
+        mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
+        mobileErrorDiv.classList.add('invalid');
     }
 }
 
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
+    const mobileResultDiv = document.getElementById("mobileResult");
     const orderSelect = document.getElementById("orderSelect").value;
     resultDiv.innerHTML = "";
+    mobileResultDiv.innerHTML = "";
 
     let charsToDisplay;
     if (orderSelect === "alphabetical") {
@@ -90,17 +102,21 @@ function displayCounts(tempCounts = characterCounts) {
         const vowels = ["a", "e", "i", "o", "u"];
         const consonants = Object.keys(tempCounts).filter(char => !vowels.includes(char));
         resultDiv.innerHTML += "<div class='separator'><strong>Vocali:</strong></div>";
+        mobileResultDiv.innerHTML += "<div class='separator'><strong>Vocali:</strong></div>";
         for (let char of vowels) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
                 resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
             }
         }
         resultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
+        mobileResultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
         for (let char of consonants) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
                 resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
             }
         }
         return;
@@ -112,6 +128,7 @@ function displayCounts(tempCounts = characterCounts) {
         if (tempCounts[char]) {
             const count = tempCounts[char];
             resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
         }
     }
 }
