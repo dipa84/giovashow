@@ -1,201 +1,179 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aiutante Anagrammatico di GiovaShow</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-        }
-        h1 {
-            color: #333;
-            font-size: 1.5em;
-            text-align: center;
-        }
-        p {
-            margin: 5px 0;
-            font-size: 0.9em;
-            color: #555;
-        }
-        input, button, select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 0.9em;
-        }
-        fieldset {
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px 15px;
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            position: relative;
-        }
-        fieldset legend {
-            font-size: 0.8em;
-            color: #333;
-            padding: 0 5px;
-            background-color: #f9f9f9;
-            position: absolute;
-            top: -12px;
-            left: 10px;
-        }
-        .word-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .word-buttons button {
-            width: auto;
-            padding: 5px 10px;
-            margin: 5px;
-            background-color: #f5f5f5;
-            color: #333;
-            cursor: pointer;
-            border: 1px solid #ddd;
-            font-size: 0.9em;
-        }
-        .word-buttons button:hover {
-            background-color: #e0e0e0;
-        }
-        button {
-            background-color: #f5f5f5;
-            color: #333;
-            cursor: pointer;
-            border: 1px solid #ddd;
-        }
-        button:hover {
-            background-color: #e0e0e0;
-        }
-        .result {
-            text-align: left;
-            width: 100%;
-            min-height: 150px;
-            margin-top: 20px;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-        .result.empty::before {
-            content: "Ciao! Sono l'aiutante anagrammatico (e anticlericale) di GiovaShow. Inizia inserendo una frase sopra e visualizzerò qui le lettere disponibili. Potrai modificare la frase e vedrai qui sotto le lettere rimanenti.";
-            color: #999;
-        }
-        .error {
-            color: red;
-            font-size: 0.8em;
-        }
-        .hidden {
-            visibility: hidden;
-        }
-        .valid {
-            color: green;
-        }
-        .invalid {
-            color: red;
-        }
-        .separator {
-            border-top: 1px solid #ddd;
-            margin-top: 10px;
-            padding-top: 10px;
-        }
-        .fieldset-small {
-            padding: 10px;
-        }
-        .fieldset-small legend {
-            font-size: 0.8em;
-        }
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                padding: 15px;
-            }
-            input, button, select {
-                padding: 8px;
-                font-size: 0.8em;
-            }
-            fieldset {
-                padding: 10px;
-            }
-            fieldset legend {
-                font-size: 0.9em;
-            }
-            .result {
-                padding: 8px;
-                font-size: 0.8em;
-            }
-            .error {
-                font-size: 0.8em;
-            }
-            .word-buttons button {
-                padding: 5px 8px;
-                font-size: 0.8em;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>Aiutante Anagrammatico di GiovaShow</h1>
-    <div class="container">
-        <fieldset class="fieldset-small">
-            <legend>Frase da Anagrammare</legend>
-            <p>Inserisci la frase di partenza:</p>
-            <input type="text" id="textInput" placeholder="Inserisci la frase qui" oninput="countCharacters()">
-        </fieldset>
+let characterCounts = {};
+let orderOfAppearance = [];
 
-        <fieldset class="fieldset-small">
-            <legend>Lettere</legend>
-            <p>Seleziona l'ordine di visualizzazione delle lettere:</p>
-            <select id="orderSelect" onchange="updateCounts()">
-                <option value="appearance">Ordine di Apparizione</option>
-                <option value="alphabetical">Ordine Alfabetico</option>
-                <option value="vowelsConsonants">Vocali e Consonanti</option>
-            </select>
-            <div id="result" class="result empty"></div>
-            <button onclick="copyRemainingLetters()">Copia Lettere Rimanenti</button>
-        </fieldset>
+function countCharacters() {
+    const textInput = document.getElementById("textInput").value.toLowerCase();
+    characterCounts = {};
+    orderOfAppearance = [];
 
-        <fieldset class="fieldset-small">
-            <legend>Crea Anagramma</legend>
-            <p>Inserisci il testo per creare un anagramma valido dalla frase di partenza:</p>
-            <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" oninput="modifyCount()">
-        </fieldset>
+    for (let char of textInput) {
+        if (isLetter(char)) {
+            if (characterCounts[char]) {
+                characterCounts[char]++;
+            } else {
+                characterCounts[char] = 1;
+                orderOfAppearance.push(char);
+            }
+        }
+    }
 
-        <fieldset class="fieldset-small">
-            <legend>Suggerimenti</legend>
-            <div class="word-buttons">
-                <button onclick="insertWord('dio')">Dio</button>
-                <button onclick="insertWord('gesu')">Gesù</button>
-                <button onclick="insertWord('cristo')">Cristo</button>
-                <button onclick="insertWord('inculato')">Inculato</button>
-                <button onclick="insertWord('inqulato')">Inqulato</button>
-                <button onclick="insertWord('inkulato')">Inkulato</button>
-            </div>
-        </fieldset>
+    const resultDiv = document.getElementById("result");
+    const mobileResultDiv = document.getElementById("mobileResult");
+    if (textInput) {
+        resultDiv.classList.remove("empty");
+        mobileResultDiv.classList.remove("empty");
+    } else {
+        resultDiv.classList.add("empty");
+        mobileResultDiv.classList.add("empty");
+    }
 
-        <div id="modifyResult" class="result">Testo Vuoto</div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    displayCounts();
+    modifyCount(); // Update the modify count display
+}
+
+function modifyCount() {
+    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    const modifyResultDiv = document.getElementById("modifyResult");
+    const mobileErrorDiv = document.getElementById("mobileError");
+    modifyResultDiv.innerHTML = "Anagramma Valido ma Incompleto";
+    mobileErrorDiv.innerHTML = "";
+    modifyResultDiv.classList.remove('valid', 'invalid');
+    mobileErrorDiv.classList.remove('valid', 'invalid');
+
+    // Create a copy of characterCounts to work with
+    let tempCounts = { ...characterCounts };
+    let valid = true;
+    let unavailableLetters = [];
+    let allLettersUsed = true;
+
+    for (let char of modifyInput) {
+        if (isLetter(char)) {
+            if (tempCounts[char]) {
+                tempCounts[char]--;
+                if (tempCounts[char] < 0) {
+                    valid = false;
+                    unavailableLetters.push(char);
+                    tempCounts[char] = 0; // Reset to 0 to prevent negative counts
+                }
+            } else {
+                valid = false;
+                unavailableLetters.push(char);
+            }
+        }
+    }
+
+    for (let char in tempCounts) {
+        if (tempCounts[char] > 0) {
+            allLettersUsed = false;
+            break;
+        }
+    }
+
+    displayCounts(tempCounts);
+
+    if (valid && allLettersUsed) {
+        modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
+        modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.classList.add('valid');
+    } else if (valid) {
+        modifyResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
+        modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.classList.add('valid');
+    } else {
+        let errorMessage = unavailableLetters.length === 1 ? `La lettera "${unavailableLetters[0]}" non è disponibile!` : `Le lettere "${unavailableLetters.join('", "')}" non sono disponibili!`;
+        modifyResultDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
+        modifyResultDiv.classList.add('invalid');
+        mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
+        mobileErrorDiv.classList.add('invalid');
+    }
+}
+
+function displayCounts(tempCounts = characterCounts) {
+    const resultDiv = document.getElementById("result");
+    const mobileResultDiv = document.getElementById("mobileResult");
+    const orderSelect = document.getElementById("orderSelect").value;
+    resultDiv.innerHTML = "";
+    mobileResultDiv.innerHTML = "";
+
+    let charsToDisplay;
+    if (orderSelect === "alphabetical") {
+        charsToDisplay = Object.keys(tempCounts).sort();
+    } else if (orderSelect === "vowelsConsonants") {
+        const vowels = ["a", "e", "i", "o", "u"];
+        const consonants = Object.keys(tempCounts).filter(char => !vowels.includes(char));
+        resultDiv.innerHTML += "<div class='separator'><strong>Vocali:</strong></div>";
+        mobileResultDiv.innerHTML += "<div class='separator'><strong>Vocali:</strong></div>";
+        for (let char of vowels) {
+            if (tempCounts[char]) {
+                const count = tempCounts[char];
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+            }
+        }
+        resultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
+        mobileResultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
+        for (let char of consonants) {
+            if (tempCounts[char]) {
+                const count = tempCounts[char];
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+            }
+        }
+        return;
+    } else {
+        charsToDisplay = orderOfAppearance;
+    }
+
+    for (let char of charsToDisplay) {
+        if (tempCounts[char]) {
+            const count = tempCounts[char];
+            resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+        }
+    }
+}
+
+function updateCounts() {
+    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let tempCounts = { ...characterCounts };
+
+    for (let char of modifyInput) {
+        if (isLetter(char) && tempCounts[char]) {
+            tempCounts[char]--;
+        }
+    }
+
+    displayCounts(tempCounts);
+}
+
+function isLetter(char) {
+    return char >= 'a' && char <= 'z';
+}
+
+function copyRemainingLetters() {
+    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let tempCounts = { ...characterCounts };
+
+    for (let char of modifyInput) {
+        if (isLetter(char)) {
+            if (tempCounts[char]) {
+                tempCounts[char]--;
+            }
+        }
+    }
+
+    let remainingLetters = "";
+    for (let char in tempCounts) {
+        remainingLetters += char.repeat(tempCounts[char]);
+    }
+
+    navigator.clipboard.writeText(remainingLetters).then(() => {
+        alert("Lettere rimanenti copiate negli appunti: " + remainingLetters);
+    });
+}
+
+function insertWord(word) {
+    const modifyInput = document.getElementById("modifyInput");
+    modifyInput.value += word;
+    modifyCount();
+}
