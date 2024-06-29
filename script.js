@@ -1,7 +1,7 @@
 document.getElementById('modifyInput').addEventListener('focus', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth <= 600) {
-        fixedInfo.style.display = 'block';
+        fixedInfo.style.visibility = 'visible';
         fixedInfo.style.position = 'absolute';
         fixedInfo.style.bottom = '100px'; // Adjust as needed
     }
@@ -9,7 +9,23 @@ document.getElementById('modifyInput').addEventListener('focus', function() {
 
 document.getElementById('modifyInput').addEventListener('blur', function() {
     if (window.innerWidth <= 600) {
-        document.querySelector('.fixed-info').style.display = 'none';
+        document.querySelector('.fixed-info').style.visibility = 'hidden';
+    }
+});
+
+// Initialize the visibility to hidden for desktop view
+window.addEventListener('resize', function() {
+    const fixedInfo = document.querySelector('.fixed-info');
+    if (window.innerWidth > 600) {
+        fixedInfo.style.visibility = 'hidden';
+    }
+});
+
+// Initial check on page load
+window.addEventListener('load', function() {
+    const fixedInfo = document.querySelector('.fixed-info');
+    if (window.innerWidth > 600) {
+        fixedInfo.style.visibility = 'hidden';
     }
 });
 
