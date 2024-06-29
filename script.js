@@ -4,7 +4,11 @@ document.getElementById('modifyInput').addEventListener('focus', function() {
     if (window.innerWidth <= 600) {
         fixedInfo.style.display = 'flex';
         fixedInfo.style.position = 'absolute';
-        fixedInfo.style.top = `${modifyInput.getBoundingClientRect().top - fixedInfo.offsetHeight}px`;
+        const inputRect = modifyInput.getBoundingClientRect();
+        const fixedInfoHeight = fixedInfo.offsetHeight;
+        fixedInfo.style.top = `${inputRect.top - fixedInfoHeight - 10}px`; // Posiziona sopra l'input con un margine di 10px
+        fixedInfo.style.left = `${inputRect.left}px`;
+        fixedInfo.style.width = `${inputRect.width}px`;
     }
 });
 
