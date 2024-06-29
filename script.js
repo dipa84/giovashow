@@ -1,12 +1,16 @@
 document.getElementById('modifyInput').addEventListener('focus', function() {
     const fixedInfo = document.querySelector('.fixed-info');
-    fixedInfo.style.display = 'block';
-    fixedInfo.style.position = 'absolute';
-    fixedInfo.style.bottom = '100px'; // Adjust as needed
+    if (window.innerWidth <= 600) {
+        fixedInfo.style.display = 'block';
+        fixedInfo.style.position = 'absolute';
+        fixedInfo.style.bottom = '100px'; // Adjust as needed
+    }
 });
 
 document.getElementById('modifyInput').addEventListener('blur', function() {
-    document.querySelector('.fixed-info').style.display = 'none';
+    if (window.innerWidth <= 600) {
+        document.querySelector('.fixed-info').style.display = 'none';
+    }
 });
 
 let characterCounts = {};
