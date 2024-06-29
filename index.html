@@ -212,7 +212,10 @@ button:hover {
             <div id="result" class="result empty"></div>
             <button onclick="copyRemainingLetters()">Copia Lettere Rimanenti</button>
         </fieldset>
-
+    <div class="fixed-info" id="fixedInfo">
+        <div id="mobileResult" class="result">Testo Vuoto</div>
+        <div id="mobileError" class="result"></div>
+    </div>
         <fieldset class="fieldset-small">
             <legend>Crea Anagramma</legend>
             <p>Inserisci il testo per creare un anagramma valido dalla frase di partenza:</p>
@@ -232,10 +235,6 @@ button:hover {
         </fieldset>
 
         <div id="modifyResult" class="result">Testo Vuoto</div>
-    </div>
-    <div class="fixed-info" id="fixedInfo">
-        <div id="mobileResult" class="result">Testo Vuoto</div>
-        <div id="mobileError" class="result"></div>
     </div>
     <script src="script.js"></script>
 </body>
