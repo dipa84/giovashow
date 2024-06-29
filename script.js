@@ -74,10 +74,12 @@ function modifyCount() {
     if (valid && allLettersUsed) {
         modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
         modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.innerHTML = "Anagramma Valido e Completo 🎉";
         mobileErrorDiv.classList.add('valid');
     } else if (valid) {
         modifyResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
         modifyResultDiv.classList.add('valid');
+        mobileErrorDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
         mobileErrorDiv.classList.add('valid');
     } else {
         let errorMessage = unavailableLetters.length === 1 ? `La lettera "${unavailableLetters[0]}" non è disponibile!` : `Le lettere "${unavailableLetters.join('", "')}" non sono disponibili!`;
