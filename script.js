@@ -40,7 +40,6 @@ function modifyCount() {
     modifyResultDiv.classList.remove('valid', 'invalid');
     mobileErrorDiv.classList.remove('valid', 'invalid');
 
-    // Create a copy of characterCounts to work with
     let tempCounts = { ...characterCounts };
     let valid = true;
     let unavailableLetters = [];
