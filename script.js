@@ -3,7 +3,7 @@ document.getElementById('modifyInput').addEventListener('focus', function() {
     if (window.innerWidth <= 600) {
         fixedInfo.style.visibility = 'visible';
         fixedInfo.style.position = 'absolute';
-        fixedInfo.style.bottom = '100px'; // Adjust as needed
+        fixedInfo.style.bottom = '100px';
     }
 });
 
@@ -13,7 +13,6 @@ document.getElementById('modifyInput').addEventListener('blur', function() {
     }
 });
 
-// Initialize the visibility to hidden for desktop view
 window.addEventListener('resize', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth > 600) {
@@ -21,7 +20,6 @@ window.addEventListener('resize', function() {
     }
 });
 
-// Initial check on page load
 window.addEventListener('load', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth > 600) {
@@ -56,7 +54,7 @@ function countCharacters() {
     }
 
     displayCounts();
-    modifyCount(); // Update the modify count display
+    modifyCount();
 }
 
 function modifyCount() {
@@ -80,7 +78,7 @@ function modifyCount() {
                 if (tempCounts[char] < 0) {
                     valid = false;
                     unavailableLetters.push(char);
-                    tempCounts[char] = 0; // Reset to 0 to prevent negative counts
+                    tempCounts[char] = 0;
                 }
             } else {
                 valid = false;
@@ -115,10 +113,6 @@ function modifyCount() {
     }
 }
 
-function addSpansAndSeparators(text) {
-    return text.split('').map(char => `<span>${char}</span>`).join('');
-}
-
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
@@ -137,8 +131,8 @@ function displayCounts(tempCounts = characterCounts) {
         for (let char of vowels) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
-                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
-                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
             }
         }
         resultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
@@ -146,8 +140,8 @@ function displayCounts(tempCounts = characterCounts) {
         for (let char of consonants) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
-                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
-                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
             }
         }
         return;
@@ -158,10 +152,14 @@ function displayCounts(tempCounts = characterCounts) {
     for (let char of charsToDisplay) {
         if (tempCounts[char]) {
             const count = tempCounts[char];
-            resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
-            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+            resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
+            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${wrapGroupsWithSpan(Array(count).fill(char).join(' '))}</p>`;
         }
     }
+}
+
+function wrapGroupsWithSpan(text) {
+    return `<span>${text}</span>`;
 }
 
 function updateCounts() {
