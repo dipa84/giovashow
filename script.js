@@ -1,25 +1,26 @@
-document.getElementById('modifyInput').addEventListener('focus', function() {
-    const fixedInfo = document.querySelector('.fixed-info');
+function showFixedInfo() {
+    const fixedInfo = document.getElementById('fixedInfo');
     if (window.innerWidth <= 600) {
         fixedInfo.style.display = 'flex';
     }
-});
+}
 
-document.getElementById('modifyInput').addEventListener('blur', function() {
+function hideFixedInfo() {
+    const fixedInfo = document.getElementById('fixedInfo');
     if (window.innerWidth <= 600) {
-        document.querySelector('.fixed-info').style.display = 'none';
+        fixedInfo.style.display = 'none';
     }
-});
+}
 
 window.addEventListener('resize', function() {
-    const fixedInfo = document.querySelector('.fixed-info');
+    const fixedInfo = document.getElementById('fixedInfo');
     if (window.innerWidth > 600) {
         fixedInfo.style.display = 'none';
     }
 });
 
 window.addEventListener('load', function() {
-    const fixedInfo = document.querySelector('.fixed-info');
+    const fixedInfo = document.getElementById('fixedInfo');
     if (window.innerWidth > 600) {
         fixedInfo.style.display = 'none';
     }
@@ -177,4 +178,33 @@ function updateCounts() {
 document.getElementById('orderSelect').addEventListener('change', updateCounts); // Aggiungi l'event listener qui
 
 function isLetter(char) {
-    return char >= 'a' &&
+    return char >= 'a' && char <= 'z';
+}
+
+function copyRemainingLetters() {
+    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let tempCounts = { ...characterCounts };
+
+    for (let char of modifyInput) {
+        if (isLetter(char)) {
+            if (tempCounts[char]) {
+                tempCounts[char]--;
+            }
+        }
+    }
+
+    let remainingLetters = "";
+    for (let char in tempCounts) {
+        remainingLetters += char.repeat(tempCounts[char]);
+    }
+
+    navigator.clipboard.writeText(remainingLetters).then(() => {
+        alert("Lettere rimanenti copiate negli appunti: " + remainingLetters);
+    });
+}
+
+function insertWord(word) {
+    const modifyInput = document.getElementById("modifyInput");
+    modifyInput.value += word;
+    modifyCount();
+}
