@@ -5,175 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aiutante Anagrammatico di GiovaShow</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-        }
-        h1 {
-            color: #333;
-            font-size: 1.5em;
-            text-align: center;
-        }
-        p {
-            margin: 5px 0;
-            font-size: 0.9em;
-            color: #555;
-        }
-        input, button, select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 0.9em;
-        }
-        fieldset {
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px 15px;
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            position: relative;
-        }
-        fieldset legend {
-            font-size: 0.8em;
-            color: #333;
-            padding: 0 5px;
-            background-color: #f9f9f9;
-            position: absolute;
-            top: -12px;
-            left: 10px;
-        }
-        .word-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .word-buttons button {
-            width: auto;
-            padding: 5px 10px;
-            margin: 5px;
-            background-color: #f5f5f5;
-            color: #333;
-            cursor: pointer;
-            border: 1px solid #ddd;
-            font-size: 0.9em;
-        }
-        .word-buttons button:hover {
-            background-color: #e0e0e0;
-        }
-        button {
-            background-color: #f5f5f5;
-            color: #333;
-            cursor: pointer;
-            border: 1px solid #ddd;
-        }
-        button:hover {
-            background-color: #e0e0e0;
-        }
-        .result {
-            text-align: left;
-            width: 100%;
-            min-height: 150px;
-            margin-top: 20px;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-        .result.empty::before {
-            content: "Ciao! Sono l'aiutante anagrammatico (e anticlericale) di GiovaShow. Inizia inserendo una frase sopra e visualizzerò qui le lettere disponibili. Potrai modificare la frase e vedrai qui sotto le lettere rimanenti.";
-            color: #999;
-        }
-        .error {
-            color: red;
-            font-size: 0.8em;
-        }
-        .hidden {
-            visibility: hidden;
-        }
-        .valid {
-            color: green;
-        }
-        .invalid {
-            color: red;
-        }
-        .separator {
-            border-top: 1px solid #ddd;
-            margin-top: 10px;
-            padding-top: 10px;
-        }
-        .fieldset-small {
-            padding: 10px;
-        }
-        .fieldset-small legend {
-            font-size: 0.8em;
-        }
-        .fixed-info {
-            display: none;
-        }
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                padding: 15px;
-            }
-            input, button, select {
-                padding: 8px;
-                font-size: 0.8em;
-            }
-            fieldset {
-                padding: 10px;
-            }
-            fieldset legend {
-                font-size: 0.9em;
-            }
-            .result {
-                padding: 8px;
-                font-size: 0.8em;
-            }
-            .error {
-                font-size: 0.8em;
-            }
-            .word-buttons button {
-                padding: 5px 8px;
-                font-size: 0.8em;
-            }
-            .fixed-info {
-                display: block;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: #fff;
-                border-top: 1px solid #ddd;
-                padding: 10px;
-                text-align: center;
-                font-size: 0.8em;
-                z-index: 1000;
-            }
-            .fixed-info .result {
-                min-height: auto;
-                margin-top: 0;
-                padding: 5px;
-            }
-        }
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+h1 {
+    color: #333;
+    font-size: 1.5em;
+    text-align: center;
+}
+p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+input, button, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    position: relative;
+}
+fieldset legend {
+    font-size: 0.8em;
+    color: #333;
+    padding: 0 5px;
+    background-color: #f9f9f9;
+    position: absolute;
+    top: -12px;
+    left: 10px;
+}
+.word-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.word-buttons button {
+    width: auto;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    font-size: 0.9em;
+}
+.word-buttons button:hover {
+    background-color: #e0e0e0;
+}
+button {
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+button:hover {
+    background-color: #e0e0e0;
+}
+.result {
+    text-align: left;
+    width: 100%;
+    min-height: 150px;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.result.empty::before {
+    content: "Ciao! Sono l'aiutante anagrammatico (e anticlericale) di GiovaShow. Inizia inserendo una frase sopra e visualizzerò qui le lettere disponibili. Potrai modificare la frase e vedrai qui sotto le lettere rimanenti.";
+    color: #999;
+}
+.error {
+    color: red;
+    font-size: 0.8em;
+}
+.hidden {
+    visibility: hidden;
+}
+.valid {
+    color: green;
+}
+.invalid {
+    color: red;
+}
+.separator {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.fieldset-small {
+    padding: 10px;
+}
+.fieldset-small legend {
+    font-size: 0.8em;
+}
+.fixed-info {
+    display: none;
+}
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    input, button, select {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    fieldset {
+        padding: 10px;
+    }
+    fieldset legend {
+        font-size: 0.9em;
+    }
+    .result {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    .error {
+        font-size: 0.8em;
+    }
+    .word-buttons button {
+        padding: 5px 8px;
+        font-size: 0.8em;
+    }
+    .fixed-info {
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.8em;
+        z-index: 1000;
+    }
+    .fixed-info .result {
+        min-height: auto;
+        margin-top: 0;
+        padding: 5px;
+        width: 48%;
+    }
+}
     </style>
 </head>
 <body>
