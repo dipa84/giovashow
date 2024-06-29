@@ -60,7 +60,6 @@ function countCharacters() {
 function modifyCount() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
     const modifyResultDiv = document.getElementById("modifyResult");
-    const mobileResultDiv = document.getElementById("mobileResult");
     const mobileErrorDiv = document.getElementById("mobileError");
     modifyResultDiv.innerHTML = "Anagramma Valido ma Incompleto";
     mobileErrorDiv.innerHTML = "";
@@ -99,19 +98,17 @@ function modifyCount() {
 
     if (valid && allLettersUsed) {
         modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
-        mobileErrorDiv.innerHTML = "Anagramma Valido e Completo 🎉";
         modifyResultDiv.classList.add('valid');
         mobileErrorDiv.classList.add('valid');
     } else if (valid) {
         modifyResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
-        mobileErrorDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
         modifyResultDiv.classList.add('valid');
         mobileErrorDiv.classList.add('valid');
     } else {
         let errorMessage = unavailableLetters.length === 1 ? `La lettera "${unavailableLetters[0]}" non è disponibile!` : `Le lettere "${unavailableLetters.join('", "')}" non sono disponibili!`;
         modifyResultDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
-        mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
         modifyResultDiv.classList.add('invalid');
+        mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
         mobileErrorDiv.classList.add('invalid');
     }
 }
@@ -160,7 +157,6 @@ function displayCounts(tempCounts = characterCounts) {
         }
     }
 }
-
 
 function wrapGroupsWithSpan(text) {
     return `<span>${text}</span>`;
