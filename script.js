@@ -1,14 +1,7 @@
 document.getElementById('modifyInput').addEventListener('focus', function() {
     const fixedInfo = document.querySelector('.fixed-info');
-    const modifyInput = document.getElementById('modifyInput');
     if (window.innerWidth <= 600) {
         fixedInfo.style.display = 'flex';
-        fixedInfo.style.position = 'absolute';
-        const inputRect = modifyInput.getBoundingClientRect();
-        const fixedInfoHeight = fixedInfo.offsetHeight;
-        fixedInfo.style.top = `${inputRect.top - fixedInfoHeight - 10}px`; // Posiziona sopra l'input con un margine di 10px
-        fixedInfo.style.left = `${inputRect.left}px`;
-        fixedInfo.style.width = `${inputRect.width}px`;
     }
 });
 
@@ -184,33 +177,4 @@ function updateCounts() {
 document.getElementById('orderSelect').addEventListener('change', updateCounts); // Aggiungi l'event listener qui
 
 function isLetter(char) {
-    return char >= 'a' && char <= 'z';
-}
-
-function copyRemainingLetters() {
-    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
-    let tempCounts = { ...characterCounts };
-
-    for (let char of modifyInput) {
-        if (isLetter(char)) {
-            if (tempCounts[char]) {
-                tempCounts[char]--;
-            }
-        }
-    }
-
-    let remainingLetters = "";
-    for (let char in tempCounts) {
-        remainingLetters += char.repeat(tempCounts[char]);
-    }
-
-    navigator.clipboard.writeText(remainingLetters).then(() => {
-        alert("Lettere rimanenti copiate negli appunti: " + remainingLetters);
-    });
-}
-
-function insertWord(word) {
-    const modifyInput = document.getElementById("modifyInput");
-    modifyInput.value += word;
-    modifyCount();
-}
+    return char >= 'a' &&
