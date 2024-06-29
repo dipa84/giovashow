@@ -188,6 +188,14 @@
                 display: inline-block;
                 white-space: nowrap;
             }
+            .fixed-info-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .fixed-info-container .result {
+                width: 100%;
+                text-align: left;
+            }
         }
     </style>
 </head>
@@ -197,7 +205,7 @@
         <fieldset class="fieldset-small">
             <legend>Frase da Anagrammare</legend>
             <p>Inserisci la frase di partenza:</p>
-            <input type="text" id="textInput" placeholder="Inserisci la frase qui" oninput="countCharacters()">
+            <input type="text" id="textInput" placeholder="Inserisci la frase qui" onfocus="adjustInfoContainer()" oninput="countCharacters()">
         </fieldset>
 
         <fieldset class="fieldset-small">
@@ -215,7 +223,7 @@
         <fieldset class="fieldset-small">
             <legend>Crea Anagramma</legend>
             <p>Inserisci il testo per creare un anagramma valido dalla frase di partenza:</p>
-            <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" oninput="modifyCount()">
+            <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" onfocus="adjustInfoContainer()" oninput="modifyCount()">
         </fieldset>
 
         <fieldset class="fieldset-small">
@@ -237,5 +245,12 @@
         <div id="mobileError" class="result">Anagramma Valido</div>
     </div>
     <script src="script.js"></script>
+    <script>
+        function adjustInfoContainer() {
+            const infoContainer = document.querySelector('.fixed-info-container');
+            infoContainer.style.position = 'relative';
+            infoContainer.style.top = '0';
+        }
+    </script>
 </body>
 </html>
