@@ -74,8 +74,6 @@ function modifyCount() {
     let unavailableLetters = [];
     let allLettersUsed = true;
 
-    console.log("Initial Temp Counts: ", tempCounts);
-
     for (let char of modifyInput) {
         if (isLetter(char)) {
             if (tempCounts[char]) {
@@ -92,8 +90,6 @@ function modifyCount() {
         }
     }
 
-    console.log("After Modification Temp Counts: ", tempCounts);
-
     for (let char in tempCounts) {
         if (tempCounts[char] > 0) {
             allLettersUsed = false;
@@ -102,8 +98,6 @@ function modifyCount() {
     }
 
     displayCounts(tempCounts);
-
-    console.log("Valid: ", valid, "All Letters Used: ", allLettersUsed);
 
     if (valid && allLettersUsed) {
         modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
@@ -126,10 +120,7 @@ function modifyCount() {
         mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
         mobileErrorDiv.classList.add('invalid');
     }
-
-    console.log("Final Result Divs: ", modifyResultDiv.innerHTML, mobileResultDiv.innerHTML);
 }
-
 
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
