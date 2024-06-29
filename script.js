@@ -176,3 +176,14 @@ function insertWord(word) {
     modifyInput.value += word;
     modifyCount();
 }
+
+document.getElementById('modifyInput').addEventListener('focus', function() {
+    document.querySelector('.fixed-info').style.display = 'block';
+    document.querySelector('.fixed-info').style.position = 'absolute';
+    document.querySelector('.fixed-info').style.bottom = '100px'; // Adjust as needed
+});
+
+document.getElementById('modifyInput').addEventListener('blur', function() {
+    document.querySelector('.fixed-info').style.display = 'none';
+});
+
