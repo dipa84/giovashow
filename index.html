@@ -182,7 +182,7 @@ button:hover {
     .result p {
         display: inline;
     }
-        @media (max-width: 600px) {
+@media (max-width: 600px) {
     .fixed-info {
         display: flex;
         justify-content: space-between;
@@ -196,23 +196,25 @@ button:hover {
         text-align: center;
         font-size: 0.8em;
         z-index: 1000;
+        box-sizing: border-box;
     }
     .fixed-info .result {
-        width: 48%;
+        flex: 1;
         padding: 5px;
         font-size: 0.8em;
         min-height: auto;
         margin-top: 0;
+        box-sizing: border-box;
     }
     .fixed-info .result p {
         display: inline;
     }
     input[type="text"]#modifyInput {
-        flex: 1;
+        width: 100%;
         box-sizing: border-box;
     }
-}
-}
+    }
+    }
 }
 
     </style>
