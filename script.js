@@ -1,3 +1,14 @@
+document.getElementById('modifyInput').addEventListener('focus', function() {
+    const fixedInfo = document.querySelector('.fixed-info');
+    fixedInfo.style.display = 'block';
+    fixedInfo.style.position = 'absolute';
+    fixedInfo.style.bottom = '100px'; // Adjust as needed
+});
+
+document.getElementById('modifyInput').addEventListener('blur', function() {
+    document.querySelector('.fixed-info').style.display = 'none';
+});
+
 let characterCounts = {};
 let orderOfAppearance = [];
 
@@ -27,7 +38,6 @@ function countCharacters() {
     displayCounts();
     modifyCount(); // Update the modify count display
 }
-
 
 function modifyCount() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
@@ -85,7 +95,6 @@ function modifyCount() {
     }
 }
 
-
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
@@ -131,7 +140,6 @@ function displayCounts(tempCounts = characterCounts) {
     }
 }
 
-
 function updateCounts() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
     let tempCounts = { ...characterCounts };
@@ -176,14 +184,3 @@ function insertWord(word) {
     modifyInput.value += word;
     modifyCount();
 }
-
-document.getElementById('modifyInput').addEventListener('focus', function() {
-    document.querySelector('.fixed-info').style.display = 'block';
-    document.querySelector('.fixed-info').style.position = 'absolute';
-    document.querySelector('.fixed-info').style.bottom = '100px'; // Adjust as needed
-});
-
-document.getElementById('modifyInput').addEventListener('blur', function() {
-    document.querySelector('.fixed-info').style.display = 'none';
-});
-
