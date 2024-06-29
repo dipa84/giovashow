@@ -125,7 +125,16 @@
             font-size: 0.8em;
         }
         .fixed-info {
-            display: none;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0;
+        }
+        .fixed-info .result {
+            width: 48%;
+            min-height: auto;
+            padding: 5px;
+            font-size: 0.8em;
         }
         @media (max-width: 600px) {
             body {
@@ -156,22 +165,12 @@
                 font-size: 0.8em;
             }
             .fixed-info {
-                display: block;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: #fff;
-                border-top: 1px solid #ddd;
-                padding: 10px;
-                text-align: center;
-                font-size: 0.8em;
-                z-index: 1000;
+                flex-direction: column;
+                align-items: flex-start;
             }
             .fixed-info .result {
-                min-height: auto;
-                margin-top: 0;
-                padding: 5px;
+                width: 100%;
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -179,6 +178,10 @@
 <body>
     <h1>Aiutante Anagrammatico di GiovaShow</h1>
     <div class="container">
+        <div class="fixed-info">
+            <div id="mobileResult" class="result">Lettere Rimanenti</div>
+            <div id="mobileError" class="result">Anagramma Valido</div>
+        </div>
         <fieldset class="fieldset-small">
             <legend>Frase da Anagrammare</legend>
             <p>Inserisci la frase di partenza:</p>
@@ -216,10 +219,6 @@
         </fieldset>
 
         <div id="modifyResult" class="result">Testo Vuoto</div>
-    </div>
-    <div class="fixed-info" id="fixedInfo">
-        <div id="mobileResult" class="result">Testo Vuoto</div>
-        <div id="mobileError" class="result"></div>
     </div>
     <script src="script.js"></script>
 </body>
