@@ -127,14 +127,9 @@
         }
         .fixed-info-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             width: 100%;
-        }
-        .fixed-info {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            padding: 10px 0;
+            justify-content: space-between;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -143,9 +138,10 @@
             border-top: 1px solid #ddd;
             z-index: 1000;
             box-sizing: border-box;
+            padding: 10px;
         }
         .fixed-info .result {
-            width: 100%;
+            width: 48%;
             min-height: auto;
             padding: 5px;
             font-size: 0.8em;
@@ -178,30 +174,6 @@
             .word-buttons button {
                 padding: 5px 8px;
                 font-size: 0.8em;
-            }
-            .fixed-info-container {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: #fff;
-                border-top: 1px solid #ddd;
-                z-index: 1000;
-                padding: 10px 0;
-            }
-            .fixed-info {
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-            }
-            .fixed-info .result {
-                width: 100%;
-                margin-bottom: 10px;
-                text-align: center;
             }
         }
     </style>
@@ -248,10 +220,8 @@
         <div id="modifyResult" class="result">Testo Vuoto</div>
     </div>
     <div class="fixed-info-container">
-        <div class="fixed-info">
-            <div id="mobileResult" class="result">Lettere Rimanenti</div>
-            <div id="mobileError" class="result">Anagramma Valido</div>
-        </div>
+        <div id="mobileResult" class="result">Lettere Rimanenti</div>
+        <div id="mobileError" class="result">Anagramma Valido</div>
     </div>
     <script src="script.js"></script>
 </body>
