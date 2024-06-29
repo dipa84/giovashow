@@ -156,7 +156,7 @@
                 font-size: 0.8em;
             }
             .fixed-info {
-                display: flex;
+                display: none;
                 justify-content: space-between;
                 position: fixed;
                 bottom: 0;
@@ -180,6 +180,9 @@
             }
             .fixed-info .result p {
                 display: inline;
+            }
+            .fixed-info-mobile {
+                display: flex;
             }
         }
     </style>
@@ -214,12 +217,12 @@
         <fieldset class="fieldset-small">
             <legend>Suggerimenti</legend>
             <div class="word-buttons">
-                <button onclick="insertWord('dio ')">Dio</button>
-                <button onclick="insertWord('gesu ')">Gesù</button>
-                <button onclick="insertWord('cristo ')">Cristo</button>
-                <button onclick="insertWord('inculato ')">Inculato</button>
-                <button onclick="insertWord('inqulato ')">Inqulato</button>
-                <button onclick="insertWord('inkulato ')">Inkulato</button>
+                <button onclick="insertWord('dio')">Dio</button>
+                <button onclick="insertWord('gesu')">Gesù</button>
+                <button onclick="insertWord('cristo')">Cristo</button>
+                <button onclick="insertWord('inculato')">Inculato</button>
+                <button onclick="insertWord('inqulato')">Inqulato</button>
+                <button onclick="insertWord('inkulato')">Inkulato</button>
             </div>
         </fieldset>
 
