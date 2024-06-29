@@ -112,7 +112,8 @@ function modifyCount() {
         mobileErrorDiv.classList.add('invalid');
     }
 }
-
+    // Aggiungi questa linea per sincronizzare i due div
+    mobileErrorDiv.innerHTML = modifyResultDiv.innerHTML;
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
