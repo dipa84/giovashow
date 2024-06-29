@@ -1,29 +1,29 @@
 document.getElementById('modifyInput').addEventListener('focus', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth <= 600) {
-        fixedInfo.style.visibility = 'visible';
-        fixedInfo.style.position = 'absolute';
-        fixedInfo.style.bottom = '100px';
+        fixedInfo.style.display = 'flex'; // Usa 'flex' per mostrare l'elemento
+        fixedInfo.style.position = 'fixed';
+        fixedInfo.style.bottom = '0';
     }
 });
 
 document.getElementById('modifyInput').addEventListener('blur', function() {
     if (window.innerWidth <= 600) {
-        document.querySelector('.fixed-info').style.visibility = 'hidden';
+        document.querySelector('.fixed-info').style.display = 'none'; // Usa 'none' per nascondere l'elemento
     }
 });
 
 window.addEventListener('resize', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth > 600) {
-        fixedInfo.style.visibility = 'hidden';
+        fixedInfo.style.display = 'none'; // Usa 'none' per nascondere l'elemento
     }
 });
 
 window.addEventListener('load', function() {
     const fixedInfo = document.querySelector('.fixed-info');
     if (window.innerWidth > 600) {
-        fixedInfo.style.visibility = 'hidden';
+        fixedInfo.style.display = 'none'; // Usa 'none' per nascondere l'elemento
     }
 });
 
@@ -54,6 +54,7 @@ function countCharacters() {
     }
 
     displayCounts();
+    updateCounts(); // Aggiungi questa linea per aggiornare i conteggi dinamicamente
     modifyCount();
 }
 
@@ -174,6 +175,8 @@ function updateCounts() {
 
     displayCounts(tempCounts);
 }
+
+document.getElementById('orderSelect').addEventListener('change', updateCounts); // Aggiungi l'event listener qui
 
 function isLetter(char) {
     return char >= 'a' && char <= 'z';
