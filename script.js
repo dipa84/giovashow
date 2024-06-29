@@ -85,6 +85,7 @@ function modifyCount() {
     }
 }
 
+
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
@@ -129,6 +130,7 @@ function displayCounts(tempCounts = characterCounts) {
         }
     }
 }
+
 
 function updateCounts() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
