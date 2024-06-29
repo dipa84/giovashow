@@ -115,6 +115,10 @@ function modifyCount() {
     }
 }
 
+function addSpansAndSeparators(text) {
+    return text.split('').map(char => `<span>${char}</span>`).join('');
+}
+
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
@@ -133,8 +137,8 @@ function displayCounts(tempCounts = characterCounts) {
         for (let char of vowels) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
-                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
-                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
             }
         }
         resultDiv.innerHTML += "<div class='separator'><strong>Consonanti:</strong></div>";
@@ -142,8 +146,8 @@ function displayCounts(tempCounts = characterCounts) {
         for (let char of consonants) {
             if (tempCounts[char]) {
                 const count = tempCounts[char];
-                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
-                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+                resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+                mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
             }
         }
         return;
@@ -154,8 +158,8 @@ function displayCounts(tempCounts = characterCounts) {
     for (let char of charsToDisplay) {
         if (tempCounts[char]) {
             const count = tempCounts[char];
-            resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
-            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: ${Array(count).fill(char).join(' ')}</p>`;
+            resultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
+            mobileResultDiv.innerHTML += `<p><strong>${char.toUpperCase()}</strong>: <span>${addSpansAndSeparators(Array(count).fill(char).join(''))}</span></p>`;
         }
     }
 }
