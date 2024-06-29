@@ -18,18 +18,16 @@ function countCharacters() {
     }
 
     const resultDiv = document.getElementById("result");
-    const mobileResultDiv = document.getElementById("mobileResult");
     if (textInput) {
         resultDiv.classList.remove("empty");
-        mobileResultDiv.classList.remove("empty");
     } else {
         resultDiv.classList.add("empty");
-        mobileResultDiv.classList.add("empty");
     }
 
     displayCounts();
     modifyCount(); // Update the modify count display
 }
+
 
 function modifyCount() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
