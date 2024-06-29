@@ -182,6 +182,36 @@ button:hover {
     .result p {
         display: inline;
     }
+        @media (max-width: 600px) {
+    .fixed-info {
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.8em;
+        z-index: 1000;
+    }
+    .fixed-info .result {
+        width: 48%;
+        padding: 5px;
+        font-size: 0.8em;
+        min-height: auto;
+        margin-top: 0;
+    }
+    .fixed-info .result p {
+        display: inline;
+    }
+    input[type="text"]#modifyInput {
+        flex: 1;
+        box-sizing: border-box;
+    }
+}
 }
 }
 
