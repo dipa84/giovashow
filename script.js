@@ -60,13 +60,11 @@ function countCharacters() {
 function modifyCount() {
     const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
     const modifyResultDiv = document.getElementById("modifyResult");
-    const mobileResultDiv = document.getElementById("mobileResult"); // Assicurati di avere questa linea
+    const mobileResultDiv = document.getElementById("mobileResult");
     const mobileErrorDiv = document.getElementById("mobileError");
     modifyResultDiv.innerHTML = "Anagramma Valido ma Incompleto";
-    mobileResultDiv.innerHTML = "Anagramma Valido ma Incompleto"; // Aggiungi questa linea
     mobileErrorDiv.innerHTML = "";
     modifyResultDiv.classList.remove('valid', 'invalid');
-    mobileResultDiv.classList.remove('valid', 'invalid'); // Aggiungi questa linea
     mobileErrorDiv.classList.remove('valid', 'invalid');
 
     let tempCounts = { ...characterCounts };
@@ -101,23 +99,19 @@ function modifyCount() {
 
     if (valid && allLettersUsed) {
         modifyResultDiv.innerHTML = "Anagramma Valido e Completo 🎉";
-        mobileResultDiv.innerHTML = "Anagramma Valido e Completo 🎉"; // Aggiungi questa linea
+        mobileErrorDiv.innerHTML = "Anagramma Valido e Completo 🎉";
         modifyResultDiv.classList.add('valid');
-        mobileResultDiv.classList.add('valid'); // Aggiungi questa linea
         mobileErrorDiv.classList.add('valid');
     } else if (valid) {
         modifyResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
-        mobileResultDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto"; // Aggiungi questa linea
+        mobileErrorDiv.innerHTML = modifyInput ? "Anagramma Valido ma Incompleto" : "Testo Vuoto";
         modifyResultDiv.classList.add('valid');
-        mobileResultDiv.classList.add('valid'); // Aggiungi questa linea
         mobileErrorDiv.classList.add('valid');
     } else {
         let errorMessage = unavailableLetters.length === 1 ? `La lettera "${unavailableLetters[0]}" non è disponibile!` : `Le lettere "${unavailableLetters.join('", "')}" non sono disponibili!`;
         modifyResultDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
-        mobileResultDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`; // Aggiungi questa linea
-        modifyResultDiv.classList.add('invalid');
-        mobileResultDiv.classList.add('invalid'); // Aggiungi questa linea
         mobileErrorDiv.innerHTML = `Anagramma Non Valido<br>${errorMessage}`;
+        modifyResultDiv.classList.add('invalid');
         mobileErrorDiv.classList.add('invalid');
     }
 }
@@ -166,6 +160,7 @@ function displayCounts(tempCounts = characterCounts) {
         }
     }
 }
+
 
 function wrapGroupsWithSpan(text) {
     return `<span>${text}</span>`;
