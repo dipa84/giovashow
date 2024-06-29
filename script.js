@@ -115,6 +115,14 @@ function modifyCount() {
     // Aggiungi questa linea per sincronizzare i due div
     mobileErrorDiv.innerHTML = modifyResultDiv.innerHTML;
 }
+
+// Assicurati di aggiornare anche il mobileErrorDiv quando la pagina si carica
+document.addEventListener('DOMContentLoaded', function() {
+    const modifyResultDiv = document.getElementById("modifyResult");
+    const mobileErrorDiv = document.getElementById("mobileError");
+    mobileErrorDiv.innerHTML = modifyResultDiv.innerHTML;
+});
+
 function displayCounts(tempCounts = characterCounts) {
     const resultDiv = document.getElementById("result");
     const mobileResultDiv = document.getElementById("mobileResult");
