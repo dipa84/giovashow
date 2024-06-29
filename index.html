@@ -126,6 +126,26 @@
         }
         .fixed-info {
             display: none;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.8em;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .fixed-info .result {
+            flex: 1;
+            padding: 5px;
+            font-size: 0.8em;
+            min-height: auto;
+            margin-top: 0;
+            box-sizing: border-box;
+        }
+        .fixed-info .result p {
+            display: inline;
+            padding-right: 1ch;
         }
         @media (max-width: 600px) {
             body {
@@ -178,9 +198,6 @@
                 display: inline;
                 padding-right: 1ch;
             }
-            .fixed-info-mobile {
-                display: flex;
-            }
             .result span:not(:last-child)::after {
                 content: " | ";
             }
@@ -216,7 +233,7 @@
         <fieldset class="fieldset-small">
             <legend>Crea Anagramma</legend>
             <p>Inserisci il testo per creare un anagramma valido dalla frase di partenza:</p>
-            <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" oninput="modifyCount()">
+            <input type="text" id="modifyInput" placeholder="Inserisci il testo per creare un anagramma" onfocus="showFixedInfo()" onblur="hideFixedInfo()" oninput="modifyCount()">
         </fieldset>
 
         <fieldset class="fieldset-small">
