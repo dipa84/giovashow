@@ -21,6 +21,7 @@
             width: 100%;
             max-width: 600px;
             margin-top: 20px;
+            box-sizing: border-box;
         }
         h1 {
             color: #333;
@@ -124,11 +125,24 @@
         .fieldset-small legend {
             font-size: 0.8em;
         }
+        .fixed-info-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
         .fixed-info {
             display: flex;
             justify-content: space-between;
             width: 100%;
             padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            z-index: 1000;
+            box-sizing: border-box;
         }
         .fixed-info .result {
             width: 48%;
@@ -164,13 +178,29 @@
                 padding: 5px 8px;
                 font-size: 0.8em;
             }
+            .fixed-info-container {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #fff;
+                border-top: 1px solid #ddd;
+                z-index: 1000;
+                padding: 10px 0;
+            }
             .fixed-info {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
             }
             .fixed-info .result {
                 width: 100%;
                 margin-bottom: 10px;
+                text-align: center;
             }
         }
     </style>
@@ -178,10 +208,6 @@
 <body>
     <h1>Aiutante Anagrammatico di GiovaShow</h1>
     <div class="container">
-        <div class="fixed-info">
-            <div id="mobileResult" class="result">Lettere Rimanenti</div>
-            <div id="mobileError" class="result">Anagramma Valido</div>
-        </div>
         <fieldset class="fieldset-small">
             <legend>Frase da Anagrammare</legend>
             <p>Inserisci la frase di partenza:</p>
@@ -219,6 +245,12 @@
         </fieldset>
 
         <div id="modifyResult" class="result">Testo Vuoto</div>
+    </div>
+    <div class="fixed-info-container">
+        <div class="fixed-info">
+            <div id="mobileResult" class="result">Lettere Rimanenti</div>
+            <div id="mobileError" class="result">Anagramma Valido</div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
