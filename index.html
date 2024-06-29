@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Aiutante Anagrammatico di GiovaShow</title>
     <style>
         body {
@@ -180,10 +180,13 @@
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
+                overflow: hidden;
             }
-            .fixed-info .result p {
+            .fixed-info .result span {
                 margin: 0 5px;
                 font-size: 0.8em;
+                display: inline-block;
+                white-space: nowrap;
             }
         }
     </style>
