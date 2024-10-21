@@ -27,10 +27,16 @@ window.addEventListener('load', function() {
 });
 
 let characterCounts = {};
-let orderOfAppearance = [];
+let orderOfAppearance = {};
+
+// Funzione per rimuovere gli accenti dalle lettere
+function removeAccents(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
 
 function countCharacters() {
-    const textInput = document.getElementById("textInput").value.toLowerCase();
+    let textInput = document.getElementById("textInput").value.toLowerCase();
+    textInput = removeAccents(textInput); // Rimuovi gli accenti
     characterCounts = {};
     orderOfAppearance = [];
 
@@ -53,12 +59,13 @@ function countCharacters() {
     }
 
     displayCounts();
-    updateCounts(); // Aggiungi questa linea per aggiornare i conteggi dinamicamente
+    updateCounts(); // Aggiorna i conteggi dinamicamente
     modifyCount();
 }
 
 function modifyCount() {
-    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    modifyInput = removeAccents(modifyInput); // Rimuovi gli accenti
     const modifyResultDiv = document.getElementById("modifyResult");
     const mobileErrorDiv = document.getElementById("mobileError");
     modifyResultDiv.innerHTML = "Anagramma Valido ma Incompleto";
@@ -112,7 +119,7 @@ function modifyCount() {
         mobileErrorDiv.classList.add('invalid');
     }
 
-    // Aggiungi questa linea per sincronizzare i due div
+    // Sincronizza i due div
     mobileErrorDiv.innerHTML = modifyResultDiv.innerHTML;
 }
 
@@ -173,7 +180,8 @@ function wrapGroupsWithSpan(text) {
 }
 
 function updateCounts() {
-    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    modifyInput = removeAccents(modifyInput); // Rimuovi gli accenti
     let tempCounts = { ...characterCounts };
 
     for (let char of modifyInput) {
@@ -185,14 +193,15 @@ function updateCounts() {
     displayCounts(tempCounts);
 }
 
-document.getElementById('orderSelect').addEventListener('change', updateCounts); // Aggiungi l'event listener qui
+document.getElementById('orderSelect').addEventListener('change', updateCounts);
 
 function isLetter(char) {
-    return char >= 'a' && char <= 'z';
+    return /^[a-z]$/.test(char);
 }
 
 function copyRemainingLetters() {
-    const modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    let modifyInput = document.getElementById("modifyInput").value.toLowerCase();
+    modifyInput = removeAccents(modifyInput); // Rimuovi gli accenti
     let tempCounts = { ...characterCounts };
 
     for (let char of modifyInput) {
